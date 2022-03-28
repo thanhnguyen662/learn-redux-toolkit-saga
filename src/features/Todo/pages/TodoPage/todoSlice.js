@@ -19,6 +19,19 @@ const todoSlice = createSlice({
       fetchTodoListFail: (state) => {
          state.loading = false;
       },
+      updateTodoStatusRequest: (state) => {
+         state.loading = true;
+      },
+      updateTodoStatusSuccess: (state, action) => {
+         const { id, completed } = action.payload;
+         const findIndex = state.data.findIndex((i) => i.id === Number(id));
+
+         state.loading = false;
+         state.data[findIndex] = {
+            ...state.data[findIndex],
+            completed: completed,
+         };
+      },
    },
 });
 
